@@ -1,9 +1,14 @@
 <?php 
 
-// Silakan lihat komentar di file data-input.php untuk penjelasan kode ini, karena struktur dan logikanya serupa.
+// Mengambil data jenis parfum berdasarkan ID
+include_once 'config/class-master.php';
+$master = new MasterData();
+$dataJenis = $master->getUpdateJenis($_GET['id']); 
+
+// Menampilkan notifikasi jika update gagal
 if(isset($_GET['status'])){
     if($_GET['status'] == 'failed'){
-        echo "<script>alert('Gagal menambahkan data program studi. Silakan coba lagi.');</script>";
+        echo "<script>alert('Gagal mengubah data jenis parfum. Silakan coba lagi.');</script>";
     }
 }
 
@@ -19,7 +24,6 @@ if(isset($_GET['status'])){
 		<div class="app-wrapper">
 
 			<?php include 'template/navbar.php'; ?>
-
 			<?php include 'template/sidebar.php'; ?>
 
 			<main class="app-main">
@@ -28,12 +32,12 @@ if(isset($_GET['status'])){
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-sm-6">
-								<h3 class="mb-0">Input Program Studi</h3>
+								<h3 class="mb-0">Edit Jenis Parfum</h3>
 							</div>
 							<div class="col-sm-6">
 								<ol class="breadcrumb float-sm-end">
 									<li class="breadcrumb-item"><a href="index.php">Beranda</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Input Prodi</li>
+									<li class="breadcrumb-item active" aria-current="page">Edit Jenis</li>
 								</ol>
 							</div>
 						</div>
@@ -46,7 +50,7 @@ if(isset($_GET['status'])){
 							<div class="col-12">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">Formulir Program Studi</h3>
+										<h3 class="card-title">Formulir Jenis Parfum</h3>
 										<div class="card-tools">
 											<button type="button" class="btn btn-tool" data-lte-toggle="card-collapse" title="Collapse">
 												<i data-lte-icon="expand" class="bi bi-plus-lg"></i>
@@ -57,21 +61,19 @@ if(isset($_GET['status'])){
 											</button>
 										</div>
 									</div>
-                                    <form action="proses/proses-prodi.php?aksi=inputprodi" method="POST">
+                                    
+                                    <!-- Form Edit Jenis Parfum -->
+                                    <form action="proses/proses-jenis.php?aksi=updatejenis" method="POST">
 									    <div class="card-body">
-                                            <div class="mb-3">
-                                                <label for="nama" class="form-label">Kode Program</label>
-                                                <input type="text" class="form-control" id="kode" name="kode" placeholder="Masukkan Kode Program Studi" required>
-                                            </div>
+                                            <input type="hidden" name="id_jenis" value="<?php echo $dataJenis['id_jenis']; ?>">
 											<div class="mb-3">
-												<label for="nama" class="form-label">Nama Program Studi</label>
-												<input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Program Studi" required>
+												<label for="nama" class="form-label">Nama Jenis Parfum</label>
+												<input type="text" class="form-control" id="nama_jenis" name="nama_jenis" placeholder="Masukkan Nama Jenis Parfum" value="<?php echo $dataJenis['nama_jenis']; ?>" required>
 											</div>
                                         </div>
 									    <div class="card-footer">
-                                            <button type="button" class="btn btn-danger me-2 float-start" onclick="window.location.href='master-prodi-list.php'">Batal</button>
-                                            <button type="reset" class="btn btn-secondary me-2 float-start">Reset</button>
-                                            <button type="submit" class="btn btn-primary float-end">Submit</button>
+                                            <button type="button" class="btn btn-danger me-2 float-start" onclick="window.location.href='master-jenis-list.php'">Batal</button>
+                                            <button type="submit" class="btn btn-warning float-end">Update Data</button>
                                         </div>
                                     </form>
 								</div>

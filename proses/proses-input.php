@@ -1,29 +1,46 @@
 <?php
+include '../config/class-parfum.php';
 
-// Memasukkan file class-mahasiswa.php untuk mengakses class Mahasiswa
-include '../config/class-mahasiswa.php';
-// Membuat objek dari class Mahasiswa
-$mahasiswa = new Mahasiswa();
-// Mengambil data mahasiswa dari form input menggunakan metode POST dan menyimpannya dalam array
-$dataMahasiswa = [
-    'nim' => $_POST['nim'],
-    'nama' => $_POST['nama'],
-    'prodi' => $_POST['prodi'],
-    'alamat' => $_POST['alamat'],
-    'provinsi' => $_POST['provinsi'],
-    'email' => $_POST['email'],
-    'telp' => $_POST['telp'],
-    'status' => $_POST['status']
-];
-// Memanggil method inputMahasiswa untuk memasukkan data mahasiswa dengan parameter array $dataMahasiswa
-$input = $mahasiswa->inputMahasiswa($dataMahasiswa);
-// Mengecek apakah proses input berhasil atau tidak - true/false
-if($input){
-    // Jika berhasil, redirect ke halaman data-list.php dengan status inputsuccess
-    header("Location: ../data-list.php?status=inputsuccess");
+// Buat objek class Parfum
+$parfum = new Parfum();
+
+// Pastikan form disubmit lewat POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // Ambil data dari form
+    $dataParfum = [
+        'kode_parfum' => $_POST['kode_parfum'],
+        'nama_parfum' => $_POST['nama_parfum'],
+        'id_jenis' => $_POST['id_jenis'],
+        'id_aroma' => $_POST['id_aroma'],
+        'deskripsi' => $_POST['deskripsi'],
+        'harga' => $_POST['harga'],
+        'stok' => $_POST['stok']
+    ];
+
+    // Cek semua field wajib terisi
+    if (
+        empty($dataParfum['kode_parfum']) || 
+        empty($dataParfum['nama_parfum']) || 
+        empty($dataParfum['id_jenis']) || 
+        empty($dataParfum['id_aroma'])
+    ) {
+        header("Location: ../data-input.php?status=failed");
+        exit;
+    }
+
+    // Proses input ke database
+    $input = $parfum->inputParfum($dataParfum);
+
+    if ($input) {
+        header("Location: ../data-list.php?status=inputsuccess");
+    } else {
+        header("Location: ../data-input.php?status=failed");
+    }
+
 } else {
-    // Jika gagal, redirect ke halaman data-input.php dengan status failed
-    header("Location: ../data-input.php?status=failed");
+    // Kalau bukan POST, langsung tolak
+    header("Location: ../data-input.php?status=invalid");
+    exit;
 }
-
 ?>

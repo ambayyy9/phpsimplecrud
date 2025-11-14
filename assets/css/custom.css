@@ -1,1 +1,134 @@
-/* Taruh CSS Custom Disini */
+/* NAVBAR  */
+.navbar {
+  background: linear-gradient(90deg, #0c1a2a, #e6a4b4); /*90deg untuk ngatur arah gradasi dari kiri ke kanan*/
+  border-bottom: 2px solid #d4af37;
+  color: #fdfdfd;
+}
+.navbar a.nav-link, .navbar .navbar-brand { /*tulisan beranda*/
+  color: #fdfdfd !important;
+}
+.navbar a.nav-link:hover {
+  color: #d4af37 !important;
+}
+
+.breadcrumb a {
+    color: #9cafc5; /* tulisan beranda / */
+}
+.breadcrumb a:hover {
+    color: #d4af37; 
+    text-decoration: none; 
+}
+
+
+/*  SIDEBAR AMBARIE LUXE  */
+.app-sidebar {
+  background-color: #0c1a2a !important;
+  color: #fdfdfd !important;
+}
+
+/* Bagian atas sidebar (logo + teks) */
+
+.sidebar-brand .brand-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.sidebar-brand .brand-text {
+  color: #fdfdfd !important;
+  margin-left: 0.5rem;
+  font-weight: 500;
+}
+
+/* Daftar menu, sidebar */
+.sidebar-wrapper {
+  background: #0c1a2a !important;
+  padding: 0.5rem;
+}
+.sidebar-wrapper .nav-link {
+  color: #cfc9f6 !important;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  border-radius: 8px;
+}
+.sidebar-wrapper .nav-link:hover {
+  background-color: #e6a4b4  !important;
+  color: #0c1a2a !important;
+}
+
+/* Ikon menu */
+.sidebar-wrapper .nav-icon {
+  font-size: 1.2rem; /*ukuran teks di samping icon*/
+}
+
+.sidebar-brand .brand-link .brand-image {
+  float: left;
+  width: auto;
+  max-height: 60px;
+  line-height: 0.8;
+}
+
+/* Header antar bagian menu */
+.nav-header {
+  color: #d4af37 !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+/* .app-content-header {
+  background-color: #e6a4b4  !important;
+} */
+
+.app-main {
+    background-color: #6a6a84;
+}
+
+/*  CARD  */
+.card {
+  border: 1px solid #d4af37;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(12, 26, 42, 0.3);
+}
+.card-body {
+  background: linear-gradient(135deg, #e6a4b4, #0c1a2a); /*gradasi diagonal*/
+  color: #fdfdfd;
+}
+
+.card-header {
+    background-color: #182c43;
+    color: #fdfdfd;
+
+}
+
+/*  BUTTONS  */
+.btn-primary, .btn-success, .btn-warning {
+  background-color: #0c1a2a;
+  border-color: #d4af37;
+  color: #fdfdfd;
+}
+
+.btn-primary:hover, 
+.btn-success:hover, 
+.btn-warning:hover {
+  background-color: #e6a4b4;
+  color: #fdfdfd;
+}
+
+/* .btn-primary:active,
+.btn-success:active,
+.btn-warning:active {
+    background-color: #0c1a2a;
+    color: #fdfdfd;
+} */
+
+/* FOOTER  */
+.app-footer {
+  background-color: #0c1a2a;
+  color: #cfc9f6;
+  border-top: 2px solid #d4af37;
+  text-align: center;
+}

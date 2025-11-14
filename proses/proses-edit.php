@@ -1,30 +1,38 @@
 <?php
+// Memasukkan file class-parfum.php untuk mengakses class Parfum
+include_once '../config/class-parfum.php';
 
-// Memasukkan file class-mahasiswa.php untuk mengakses class Mahasiswa
-include_once '../config/class-mahasiswa.php';
-// Membuat objek dari class Mahasiswa
-$mahasiswa = new Mahasiswa();
-// Mengambil data mahasiswa dari form edit menggunakan metode POST dan menyimpannya dalam array
-$dataMahasiswa = [
-    'id' => $_POST['id'],
-    'nim' => $_POST['nim'],
-    'nama' => $_POST['nama'],
-    'prodi' => $_POST['prodi'],
-    'alamat' => $_POST['alamat'],
-    'provinsi' => $_POST['provinsi'],
-    'email' => $_POST['email'],
-    'telp' => $_POST['telp'],
-    'status' => $_POST['status']
-];
-// Memanggil method editMahasiswa untuk mengupdate data mahasiswa dengan parameter array $dataMahasiswa
-$edit = $mahasiswa->editMahasiswa($dataMahasiswa);
-// Mengecek apakah proses edit berhasil atau tidak - true/false
-if($edit){
-    // Jika berhasil, redirect ke halaman data-list.php dengan status editsuccess
-    header("Location: ../data-list.php?status=editsuccess");
+// Membuat objek dari class Parfum
+$parfum = new Parfum();
+
+// Pastikan semua data POST tersedia
+if (isset($_POST['id_parfum'])) {
+
+    // Mengambil data parfum dari form edit
+    $dataParfum = [
+        'id_parfum'   => $_POST['id_parfum'],
+        'kode_parfum' => $_POST['kode_parfum'],
+        'nama_parfum' => $_POST['nama_parfum'],
+        'id_jenis'    => $_POST['id_jenis'],
+        'id_aroma'    => $_POST['id_aroma'],
+        'deskripsi'   => $_POST['deskripsi'],
+        'harga'       => $_POST['harga'],
+        'stok'        => $_POST['stok']
+    ];
+
+    // Panggil method editParfum untuk update data
+    $edit = $parfum->editParfum($dataParfum);
+
+    // Mengecek apakah proses edit berhasil
+    if ($edit) {
+        header("Location: ../data-list.php?status=editsuccess");
+    } else {
+        header("Location: ../data-edit.php?id=" . $dataParfum['id_parfum'] . "&status=failed");
+    }
+
 } else {
-    // Jika gagal, redirect ke halaman data-edit.php dengan status failed dan membawa id mahasiswa
-    header("Location: ../data-edit.php?id=".$dataMahasiswa['id']."&status=failed");
+    // Jika tidak ada id_parfum, kembali ke daftar
+    header("Location: ../data-list.php?status=invalid");
 }
 
 ?>
